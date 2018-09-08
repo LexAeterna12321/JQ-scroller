@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Scrolling effect in JQ</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        .section1 {
+            background-color: rgb(32, 139, 143);
+            height: 100vh;
+        }
+
+        .section2 {
+            background-color: rgb(10, 34, 10);
+            height: 500px;
+
+        }
+
+        .section3 {
+            background-color: rgb(167, 46, 106);
+            height: 1290px;
+        }
+
+        .section4 {
+            background-color: rgb(102, 43, 28);
+            height: 150vh;
+        }
+
+        .info {
+            position: fixed;
+            left: 0;
+            height: 70px;
+            width: 100%;
+            box-shadow: 0 0 3px 3px grey;
+            background-color: rgb(200, 200, 200);
+            font-size: 30px;
+            line-height: 70px;
+            text-align: center;
+            bottom: -75px;
+            transition: .8s;
+        }
+
+        button {
+            display: block;
+            position: absolute;
+            right: 5%;
+            bottom: 5%;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 1.4rem;
+            transition: .8s;
+            color: royalblue;
+            background-color: transparent;
+            cursor: pointer;
+            border: none;
+            animation: arrow 1s alternate infinite linear;
+        }
+
+        .info.active {
+            bottom: 0;
+        }
+
+        @keyframes arrow {
+            to {
+                transform: scale(2);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <section class="section1"></section>
+        <section class="section2"></section>
+        <section class="section3"></section>
+        <section class="section4"></section>
+        <div class="info">
+            <p></p>
+            <button><i class="fas fa-arrow-up"></i></button>
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+    <script>
+        const $bottomBanner = $("div.info");
+
+        $(window).on("scroll", function () {
+            $(".info p").text("Your current scroll position: " + $(window).scrollTop());
+            if ($(window).scrollTop() > 300) {
+                $bottomBanner.addClass("active");
+
+            } else {
+                $bottomBanner.removeClass("active");
+
+            }
+        })
+
+        $(".info button").on("click", function () {
+            $("html, body").animate({
+                scrollTop: 0
+            }, 500);
+        })
+    </script>
+</body>
+
+</html>
